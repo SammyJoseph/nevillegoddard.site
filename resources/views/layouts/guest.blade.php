@@ -23,5 +23,6 @@
         </div>
 
         @livewireScripts
+        @stack('js')
     </body>
 </html>

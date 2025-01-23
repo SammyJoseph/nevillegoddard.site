@@ -1,0 +1,80 @@
+@import url(https://fonts.bunny.net/css?family=alexandria:900);
+
+:root {
+    --gradient: linear-gradient(-45deg, #be185d, #ec4899, #d946ef, #0ea5e9);
+    --gradient-dark-1: linear-gradient(-45deg, #0d0d0d, #1a1a1a, #333333, #4d4d4d);
+    --gradient-dark-2: linear-gradient(-45deg, #1a1a1a, #ff007f, #ff00ff, #8000ff);
+    --gradient-dark-3: linear-gradient(-45deg, #000000, #ff4500, #ff6347, #ff7f50);
+    --gradient-dark-4: linear-gradient(-45deg, #2c3e50, #8e44ad, #3498db, #2ecc71);
+    --gradient-dark-5: linear-gradient(-45deg, #232526, #ff1493, #ff69b4, #ffb6c1);
+    --gradient-dark-6: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
+
+}
+
+/* Background */
+body {
+    font-family: "Alexandria", sans-serif;
+}
+
+.main {
+    background: #ddd;
+    background-size: 300%;
+    background-image: var(--gradient-dark-6);
+    animation: bg-animation 15s infinite;
+}
+
+@keyframes bg-animation {
+    0% {
+        background-position: left;
+    }
+
+    50% {
+        background-position: right;
+    }
+
+    100% {
+        background-position: left;
+    }
+}
+
+/* Title */
+h1 {
+    max-width: 40ch;
+    text-align: center;
+    transform: scale(0.94);
+    animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+@keyframes scale {
+    100% {
+        transform: scale(1);
+    }
+}
+
+span {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(4px);
+}
+
+@keyframes fade-in {
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+/* Subtitle */
+#bible-verse, #source {
+    opacity: 0;
+    filter: blur(4px);
+}
+
+#bible-verse.animate, #source.animate {
+    animation: fade-in 1s forwards;
+}
+
+/* Añadimos un pequeño retraso al segundo h3 para que aparezcan secuencialmente */
+/* #source.animate {
+    animation-delay: 0.5s;
+} */
