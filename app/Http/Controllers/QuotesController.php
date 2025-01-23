@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quote;
+use App\Models\SourceType;
 use Illuminate\Http\Request;
 
 class QuotesController extends Controller
@@ -15,7 +16,7 @@ class QuotesController extends Controller
         $quote = Quote::inRandomOrder()->first();
         $words = explode(' ', $quote->quote);
 
-        return view('index', compact('quote', 'words'));
+        return view('quotes.index', compact('quote', 'words'));
     }
 
     /**
@@ -23,7 +24,9 @@ class QuotesController extends Controller
      */
     public function create()
     {
-        //
+        $source_types = SourceType::all();
+
+        return view('quotes.create', compact('source_types'));
     }
 
     /**
@@ -31,7 +34,16 @@ class QuotesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'quote' => 'string|required',
+            'bible_verse' => 'string|nullable',
+            'source_type_id' => 'nullable|exists:source_types,id',
+            'source' => 'string|nullable',
+        ]);
+
+        Quote::create($validate);
+
+        return redirect()->route('quotes.index');
     }
 
     /**
