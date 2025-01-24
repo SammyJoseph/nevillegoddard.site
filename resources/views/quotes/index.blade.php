@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="sm:py-6 lg:py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4 md:p-12">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -39,16 +39,16 @@
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $quote->id }}
                                 </th>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4 min-w-[300px]">
                                     {{ $quote->quote }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{ $quote->bible_verse }}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4 whitespace-nowrap">
                                     {{ $quote->sourceType->name }}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4 whitespace-nowrap">
                                     {{ $quote->source }}
                                 </td>
                                 <td class="px-6 py-4 text-right">
@@ -60,7 +60,11 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="mt-8">
+                    {{ $quotes->links() }}
+                </div>
             </div>
         </div>
     </div>
+
 </x-app-layout>
