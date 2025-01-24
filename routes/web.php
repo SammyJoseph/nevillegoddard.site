@@ -3,8 +3,8 @@
 use App\Http\Controllers\QuotesController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [QuotesController::class, 'index'])->name('quotes.index');
-Route::resource('quotes', QuotesController::class)->except(['index'])->middleware('auth');
+Route::get('/', [QuotesController::class, 'home'])->name('quotes.home');
+Route::resource('quotes', QuotesController::class)->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',

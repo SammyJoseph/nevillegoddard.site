@@ -8,15 +8,19 @@ use Illuminate\Http\Request;
 
 class QuotesController extends Controller
 {
+    public function home()
+    {
+        return view('index');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $quote = Quote::inRandomOrder()->first();
-        $words = explode(' ', $quote->quote);
+        $quotes = Quote::all();
 
-        return view('quotes.index', compact('quote', 'words'));
+        return view('quotes.index', compact('quotes'));
     }
 
     /**
@@ -41,9 +45,9 @@ class QuotesController extends Controller
             'source' => 'string|nullable',
         ]);
 
-        Quote::create($validate);
+        $quote = Quote::create($validate);
 
-        return redirect()->route('quotes.index');
+        return redirect()->route('quotes.index')->with('success', $quote->quote.' added successfully.');
     }
 
     /**

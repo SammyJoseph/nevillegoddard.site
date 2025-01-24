@@ -1,41 +1,66 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ config('app.name', 'Neville Goddard') }}</title>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Frases') }}
+        </h2>
+    </x-slot>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/shooting-stars.css') }}">
-
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <!-- Styles -->
-    @livewireStyles
-</head>
-<body>
-    <div id="stars" class="min-h-screen w-full flex flex-col justify-center items-center p-4 main">
-        <h1 class="text-white text-4xl sm:text-5xl lg:text-6xl !leading-tight font-cormorant-upright-medium"> 
-            @foreach ($words as $word)
-                <span class="h1-word">{{ $word }}</span>
-            @endforeach
-        </h1>
-        <div class="text-white mt-6 text-sm sm:text-base">
-            <h3 id="bible-verse" class="italic text-center font-merriweather-regular">{{ $quote->bible_verse }}</h3>
-            <h3 id="source" class="text-center font-merriweather-regular">{{ $quote->sourceType->name . ': ' . $quote->source }}</h3>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4 md:p-12">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    ID
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Frase
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Versículo
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Tipo de fuente
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Fuente
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    <span class="sr-only">Edit</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($quotes as $quote)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $quote->id }}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ $quote->quote }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{ $quote->bible_verse }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $quote->sourceType->name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $quote->source }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <a href="#"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-    
-    @livewireScripts
-    <script src="{{ asset('js/scripts.js') }}"></script>
-    <script src="{{ asset('js/shooting-stars.js') }}"></script>
-</body>
-</html>
+</x-app-layout>
