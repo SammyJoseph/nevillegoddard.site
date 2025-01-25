@@ -9,6 +9,7 @@ class QuoteDisplay extends Component
 {
     public $words;
     public $quote;
+    public $shownQuotes = [];
 
     public function mount()
     {
@@ -17,7 +18,17 @@ class QuoteDisplay extends Component
 
     public function refreshQuote()
     {
-        $this->quote = Quote::inRandomOrder()->first();
+        $newQuote = Quote::whereNotIn('id', $this->shownQuotes)
+            ->inRandomOrder()
+            ->first();
+    
+        if (!$newQuote) { // if all quotes have been shown, reset shownQuotes
+            $this->shownQuotes = [];
+            $newQuote = Quote::inRandomOrder()->first();
+        }
+    
+        $this->quote = $newQuote;
+        $this->shownQuotes[] = $this->quote->id;
         $this->words = explode(' ', $this->quote->quote);
         $this->dispatch('quote-refreshed');
     }
