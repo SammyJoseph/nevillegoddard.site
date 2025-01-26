@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $sam = User::factory()->create([
             'name' => 'Sam',
             'email' => 'sam@example.com',
         ]);
@@ -26,5 +26,7 @@ class DatabaseSeeder extends Seeder
             SourceTypesSeeder::class,
             QuotesSeeder::class,
         ]);
+
+        $sam->assignRole('super-admin');
     }
 }

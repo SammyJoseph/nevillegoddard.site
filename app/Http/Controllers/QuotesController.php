@@ -38,14 +38,16 @@ class QuotesController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
+        $validated = $request->validate([
             'quote' => 'string|required',
             'bible_verse' => 'string|nullable',
             'source_type_id' => 'nullable|exists:source_types,id',
             'source' => 'string|nullable',
         ]);
 
-        $quote = Quote::create($validate);
+        $validated['quote'] = trim($validated['quote']); // quitar espacios en blanco al principio y al final
+
+        $quote = Quote::create($validated);
 
         return redirect()->route('quotes.index')->with('success', $quote->quote.' added successfully.');
     }

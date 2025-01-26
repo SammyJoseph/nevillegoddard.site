@@ -4,7 +4,7 @@ use App\Http\Controllers\QuotesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [QuotesController::class, 'home'])->name('quotes.home');
-Route::resource('quotes', QuotesController::class)->middleware('auth');
+Route::resource('quotes', QuotesController::class)->middleware(['auth', 'role:super-admin']);
 
 Route::middleware([
     'auth:sanctum',
