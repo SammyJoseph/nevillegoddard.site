@@ -18,13 +18,18 @@ class QuoteDisplay extends Component
 
     public function refreshQuote()
     {
-        $newQuote = Quote::whereNotIn('id', $this->shownQuotes)
+        $newQuote = Quote::with('source.sourceType')
+            ->whereNotIn('id', $this->shownQuotes)
+            ->where('status', true)
             ->inRandomOrder()
             ->first();
     
-        if (!$newQuote) { // if all quotes have been shown, reset shownQuotes
+        if (!$newQuote) {
             $this->shownQuotes = [];
-            $newQuote = Quote::inRandomOrder()->first();
+            $newQuote = Quote::with('source.sourceType')
+                ->where('status', true)
+                ->inRandomOrder()
+                ->first();
         }
     
         $this->quote = $newQuote;

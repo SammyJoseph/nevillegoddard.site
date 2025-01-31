@@ -46,10 +46,10 @@
                                     {{ $quote->bible_verse }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ $quote->sourceType->name }}
+                                    {{ $quote->source->sourceType->name }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ $quote->source }}
+                                    {{ $quote->source->name }}
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <a href="#"

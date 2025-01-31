@@ -34,7 +34,7 @@
     {{-- Source --}}
     <div class="text-white my-4 text-sm sm:text-base">
         <h3 x-ref="bibleVerse" id="bible-verse" class="italic text-center font-merriweather-regular">{{ $quote->bible_verse }}</h3>
-        <h3 x-ref="source" id="source" class="text-center font-merriweather-regular">{{ $quote->sourceType->name . ': ' . $quote->source }}</h3>
+        <h3 x-ref="source" id="source" class="text-center font-merriweather-regular">{{ $quote->source->sourceType->name . ': ' . $quote->source->name }}</h3>
     </div>
     {{-- Refresh button --}}
     <div class="text-center">

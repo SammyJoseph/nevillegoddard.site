@@ -8,8 +8,13 @@ class SourceType extends Model
 {
     protected $fillable = ['name'];
 
+    public function sources()
+    {
+        return $this->hasMany(Source::class);
+    }
+
     public function quotes()
     {
-        return $this->hasMany(Quote::class);
+        return $this->hasManyThrough(Quote::class, Source::class);
     }
 }

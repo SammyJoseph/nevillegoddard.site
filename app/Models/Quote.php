@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quote extends Model
 {
-    protected $fillable = ['quote', 'bible_verse', 'source', 'source_type_id'];
+    protected $fillable = ['quote', 'bible_verse', 'status', 'source_id'];
 
-    public function sourceType()
+    public function source()
     {
-        return $this->belongsTo(SourceType::class);
+        return $this->belongsTo(Source::class);
     }
 }

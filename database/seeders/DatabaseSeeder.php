@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             RoleSeeder::class,
             SourceTypesSeeder::class,
+            SourceSeeder::class,
             QuotesSeeder::class,
         ]);
 
