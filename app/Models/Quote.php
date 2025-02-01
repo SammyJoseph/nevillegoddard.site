@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Quote extends Model
@@ -11,5 +12,12 @@ class Quote extends Model
     public function source()
     {
         return $this->belongsTo(Source::class);
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('active', function (Builder $builder) {
+            $builder->where('status', true);
+        });
     }
 }

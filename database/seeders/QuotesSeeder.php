@@ -21,11 +21,16 @@ class QuotesSeeder extends Seeder
                 'quote' => 'La imaginación es el poder redentor del universo.',
                 'bible_verse' => 'Hebreos 11:1',
                 'source_id' => $sources->random()->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+
             ],
             [
                 'quote' => 'No hay límites para lo que puedes lograr, excepto los límites que te impones.',
                 'bible_verse' => 'Marcos 9:23',
                 'source_id' => $sources->random()->id,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 

@@ -16,6 +16,9 @@
                                     ID
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Estado
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Frase
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -39,6 +42,17 @@
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $quote->id }}
                                 </th>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @if($quote->status)
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Activo
+                                        </span>
+                                    @else
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                            Inactivo
+                                        </span>
+                                    @endif
+                                </td>
                                 <td class="px-6 py-4 min-w-[300px]">
                                     {{ $quote->quote }}
                                 </td>

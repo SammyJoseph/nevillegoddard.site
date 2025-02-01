@@ -18,7 +18,7 @@ class QuotesController extends Controller
      */
     public function index()
     {
-        $quotes = Quote::orderBy('created_at', 'desc')->paginate(5);
+        $quotes = Quote::withoutGlobalScope('active')->orderBy('created_at', 'desc')->paginate(10);
 
         return view('quotes.index', compact('quotes'));
     }

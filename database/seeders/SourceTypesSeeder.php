@@ -14,10 +14,10 @@ class SourceTypesSeeder extends Seeder
     public function run(): void
     {
         $sourceTypes = [
-            ['name' => 'Conferencia'],
-            ['name' => 'Libro'],
-            ['name' => 'Entrevista'],
-            ['name' => 'Artículo'],
+            ['name' => 'Conferencia', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Libro', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Entrevista', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Artículo', 'created_at' => now(), 'updated_at' => now()],
         ];
 
         DB::table('source_types')->insertOrIgnore($sourceTypes);

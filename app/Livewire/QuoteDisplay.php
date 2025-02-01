@@ -20,14 +20,12 @@ class QuoteDisplay extends Component
     {
         $newQuote = Quote::with('source.sourceType')
             ->whereNotIn('id', $this->shownQuotes)
-            ->where('status', true)
             ->inRandomOrder()
             ->first();
     
         if (!$newQuote) {
             $this->shownQuotes = [];
             $newQuote = Quote::with('source.sourceType')
-                ->where('status', true)
                 ->inRandomOrder()
                 ->first();
         }

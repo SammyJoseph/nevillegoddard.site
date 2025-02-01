@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('quotes', function (Blueprint $table) {
+        Schema::create('sources', function (Blueprint $table) {
             $table->id();
-            $table->text('quote');
-            $table->string('bible_verse')->nullable();
-            $table->foreignId('source_id')->constrained();
-            $table->boolean('status')->default(true);
+            $table->string('name');
+            $table->foreignId('source_type_id')->constrained();
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('quotes');
+        Schema::dropIfExists('sources');
     }
 };
