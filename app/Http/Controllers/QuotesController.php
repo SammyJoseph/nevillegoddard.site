@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quote;
+use App\Models\Source;
 use App\Models\SourceType;
 use Illuminate\Http\Request;
 
@@ -38,17 +39,29 @@ class QuotesController extends Controller
      */
     public function store(Request $request)
     {
+        
+        // Validar los demás campos del request
         $validated = $request->validate([
-            'quote' => 'string|required',
-            'bible_verse' => 'string|nullable',
-            'source_type_id' => 'nullable|exists:source_types,id',
-            'source' => 'string|nullable',
+            'quote'             => 'string|required',
+            'bible_verse'       => 'string|nullable',
+            'source_type_id'    => 'exists:source_types,id|required',
+            'source'            => 'string|min:3|required',
         ]);
+        $status = $request->input('status', '0') == '1' ? 1 : 0;
+        $validated['status'] = $status; // agregar el campo 'status' al array validado
 
-        $validated['quote'] = trim($validated['quote']); // quitar espacios en blanco al principio y al final
+        $source = Source::firstOrCreate(
+            [
+                'name' => $validated['source'],
+                'source_type_id' => $validated['source_type_id']
+            ]
+        );
+        $validated['source_id'] = $source->id;
+
+        $validated['quote'] = trim($validated['quote']); // quitar espacios en blanco
 
         $quote = Quote::create($validated);
-
+    
         return redirect()->route('quotes.index')->with('success', $quote->quote.' added successfully.');
     }
 

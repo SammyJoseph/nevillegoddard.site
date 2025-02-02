@@ -3,7 +3,8 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Quote;
+use App\Models\Source;
+
 class SourceAutocomplete extends Component
 {
     public $query = '';
@@ -11,11 +12,11 @@ class SourceAutocomplete extends Component
 
     public function updatedQuery()
     {
-        $this->sources = Quote::where('source', 'like', '%' . $this->query . '%')
-            ->select('source')
+        $this->sources = Source::where('name', 'like', '%' . $this->query . '%')
+            ->select('name')
             ->distinct()
             ->limit(3)
-            ->pluck('source')
+            ->pluck('name')
             ->toArray();
     }
 
