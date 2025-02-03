@@ -11,7 +11,7 @@
         <div class="relative col-span-1 flex justify-end items-center">
             <span class="text-xs font-medium text-gray-400 dark:text-gray-300 absolute -top-4 right-0">Activo</span>
             <label class="inline-flex items-center cursor-pointer">
-                <input type="checkbox" name="status" value="1" class="sr-only peer" {{ (isset($quote) && $quote->status) || old('status', true) ? 'checked' : '' }}>
+                <input type="checkbox" name="status" value="1" class="sr-only peer" {{ (isset($quote) && $quote->status) || (!isset($quote) && old('status')) ? 'checked' : '' }}>
                 <div class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
             </label>
         </div>
@@ -26,12 +26,12 @@
                     class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
                     <option value="" disabled hidden>Tipo de Fuente</option>
                     @foreach ($source_types as $source_type)
-                        <option value="{{ $source_type->id }}" {{ (isset($quote) && $quote->source_type_id == $source_type->id) || (!isset($quote) && $source_type->id == 2) || old('source_type_id') == $source_type->id ? 'selected' : '' }}>{{ $source_type->name }}</option>
+                        <option value="{{ $source_type->id }}" {{ (isset($quote) && $quote->source->source_type_id == $source_type->id) || (!isset($quote) && $source_type->id == 2) || old('source_type_id') == $source_type->id ? 'selected' : '' }}>{{ $source_type->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="relative">
-                @livewire('source-autocomplete', ['selectedSourceId' => $quote->source_id ?? old('source_id')])
+                @livewire('source-autocomplete', ['curSource' => $quote->source->name ?? old('source_id')])
             </div>
         </div>
     </div>

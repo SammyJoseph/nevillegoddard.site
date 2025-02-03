@@ -10,6 +10,11 @@ class SourceAutocomplete extends Component
     public $query = '';
     public $sources = [];
 
+    public function mount($curSource)
+    {
+        $this->query = $curSource;
+    }
+
     public function updatedQuery()
     {
         $this->sources = Source::where('name', 'like', '%' . $this->query . '%')

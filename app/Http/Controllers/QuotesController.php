@@ -85,8 +85,10 @@ class QuotesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Quote $quote)
+    public function update(Request $request, $id)
     {
+        $quote = Quote::withoutGlobalScope('active')->findOrFail($id);
+        
         $validated = $request->validate([
             'quote'             => 'string|required',
             'bible_verse'       => 'string|nullable',
