@@ -37,7 +37,7 @@
         <h3 x-ref="source" id="source" class="text-center font-merriweather-regular">{{ $quote->source->sourceType->name . ': ' . $quote->source->name }}</h3>
     </div>
     {{-- Refresh button --}}
-    <div class="text-center">
+    <div class="fixed bottom-2 left-1/2 transform -translate-x-1/2">
         <button 
             type="button" 
             wire:click="refreshQuote" 
