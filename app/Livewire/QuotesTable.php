@@ -11,6 +11,6 @@ class QuotesTable extends Component
     {
         $quotes = Quote::withoutGlobalScope('active')->orderBy('created_at', 'desc')->get();
 
-        return view('livewire.quotes-table', compact('quotes'));
+        return view('livewire.quotes-table', compact('quotes')); 
     }
 }
