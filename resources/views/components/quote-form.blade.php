@@ -4,7 +4,7 @@
         @method('PUT')
     @endif
     
-    <div class="grid grid-cols-6 gap-3 md:gap-6 mb-6">
+    <div class="grid grid-cols-6 gap-4 md:gap-6 mb-6">
         <div class="relative col-span-6 md:col-span-5 order-1">
             <input name="quote" type="text" required class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" placeholder="Escribir frase..." value="{{ $quote->quote ?? old('quote') }}">
         </div>
