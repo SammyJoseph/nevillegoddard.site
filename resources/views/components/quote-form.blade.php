@@ -6,7 +6,14 @@
     
     <div class="grid grid-cols-6 gap-4 md:gap-6 mb-6">
         <div class="relative col-span-6 md:col-span-5 order-1">
-            <input name="quote" type="text" required class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" placeholder="Escribir frase..." value="{{ $quote->quote ?? old('quote') }}">
+            <textarea
+            name="quote" required rows="4" placeholder="Escribir frase..."
+            class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm
+                    border border-slate-200 rounded-md px-3 py-2
+                    focus:outline-none focus:border-slate-400 hover:border-slate-300
+                    shadow-sm focus:shadow
+                    field-sizing-content resize-none"            
+            >{{ $quote->quote ?? old('quote') }}</textarea>
         </div>
         <div class="relative col-span-3 md:col-span-1 flex justify-end items-center order-3 md:order-2">
             <span class="text-xs font-medium text-gray-400 dark:text-gray-300 absolute -top-2 md:-top-4 right-0">Activo</span>

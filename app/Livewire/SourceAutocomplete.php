@@ -17,9 +17,23 @@ class SourceAutocomplete extends Component
 
     public function updatedQuery()
     {
-        $this->sources = Source::where('name', 'like', '%' . $this->query . '%')
-            ->select('name')
-            ->distinct()
+        if (trim($this->query) === '') {
+            $this->loadRecentSources();
+        } else {
+            $this->sources = Source::where('name', 'like', '%' . $this->query . '%')
+                ->select('name')
+                ->distinct()
+                ->limit(3)
+                ->pluck('name')
+                ->toArray();
+        }
+    }
+
+    public function loadRecentSources()
+    {
+        $this->sources = Source::whereHas('quotes')
+            ->withMax('quotes as last_used', 'updated_at')
+            ->orderBy('last_used', 'desc')
             ->limit(3)
             ->pluck('name')
             ->toArray();
