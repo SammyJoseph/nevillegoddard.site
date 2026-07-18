@@ -26,16 +26,29 @@
     x-on:quote-refreshed.window="refreshAnimations"
 >
     {{-- Quote --}}
-    <h1 x-ref="quoteText" class="text-white text-4xl sm:text-5xl lg:text-6xl !leading-tight font-cormorant-upright-medium"> 
-        @foreach ($words as $word)
-            <span class="h1-word">{{ $word }}</span>
-        @endforeach
-    </h1>
-    {{-- Source --}}
-    <div class="text-white my-4 text-sm sm:text-base">
-        <h3 x-ref="bibleVerse" id="bible-verse" class="italic text-center font-merriweather-regular">{{ $quote->bible_verse }}</h3>
-        <h3 x-ref="source" id="source" class="text-center font-merriweather-regular">{{ $quote->source->sourceType->name . ': ' . $quote->source->name }}</h3>
-    </div>
+    @if ($quote)
+        <h1 x-ref="quoteText" class="text-white text-4xl sm:text-5xl lg:text-6xl !leading-tight font-cormorant-upright-medium"> 
+            @foreach ($words as $word)
+                <span class="h1-word">{{ $word }}</span>
+            @endforeach
+        </h1>
+        {{-- Source --}}
+        <div class="text-white my-4 text-sm sm:text-base">
+            <h3 x-ref="bibleVerse" id="bible-verse" class="italic text-center font-merriweather-regular">{{ $quote->bible_verse }}</h3>
+            <h3 x-ref="source" id="source" class="text-center font-merriweather-regular">{{ $quote->source->sourceType->name . ': ' . $quote->source->name }}</h3>
+        </div>
+    @else
+        <h1 x-ref="quoteText" class="text-white text-4xl sm:text-5xl lg:text-6xl !leading-tight font-cormorant-upright-medium"> 
+            <span class="h1-word">No</span>
+            <span class="h1-word">hay</span>
+            <span class="h1-word">frases</span>
+            <span class="h1-word">disponibles</span>
+        </h1>
+        <div class="text-white my-4 text-sm sm:text-base">
+            <h3 x-ref="bibleVerse" id="bible-verse" class="italic text-center font-merriweather-regular"></h3>
+            <h3 x-ref="source" id="source" class="text-center font-merriweather-regular"></h3>
+        </div>
+    @endif
     {{-- Refresh button --}}
     <div class="fixed bottom-2 left-1/2 transform -translate-x-1/2">
         <button 

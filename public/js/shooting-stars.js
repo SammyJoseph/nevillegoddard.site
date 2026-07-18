@@ -1,13 +1,14 @@
 document.addEventListener("DOMContentLoaded", function() {
     const starCount = 45; // Number of stars to create
     const shootingStarInterval = 8000; // Interval between shooting stars in milliseconds
+    const starsContainer = document.getElementById("stars-background") || document.getElementById("stars") || document.body;
   
     function createStar() {
       const star = document.createElement("div");
       star.className = "star";
       star.style.top = `${Math.random() * 100}%`;
       star.style.left = `${Math.random() * 100}%`;
-      document.getElementById("stars").appendChild(star);
+      starsContainer.appendChild(star);
     }
   
     function createShootingStar() {
@@ -15,9 +16,11 @@ document.addEventListener("DOMContentLoaded", function() {
       shootingStar.className = "shooting-star";
       shootingStar.style.top = `${Math.random() * 100}%`;
       shootingStar.style.left = `${Math.random() * 100}%`;
-      document.body.appendChild(shootingStar);
+      starsContainer.appendChild(shootingStar);
       setTimeout(() => {
-        document.body.removeChild(shootingStar);
+        if (starsContainer.contains(shootingStar)) {
+          starsContainer.removeChild(shootingStar);
+        }
       }, 3000);
     }
   

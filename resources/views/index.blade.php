@@ -13,9 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('css/styles.css?v=0.01') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}?v=0.02">
     <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/shooting-stars.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/shooting-stars.css') }}?v=0.02">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -24,32 +24,40 @@
     @livewireStyles
 </head>
 <body>
-    <div class="fixed">
-        <div id="burger-menu" class="left-5 top-5">
-            <span></span>
-          </div>
-          
-          <div id="menu">
-              <ul>
-                <li><a href="{{ route('quotes.index') }}">Frases</a></li>
-                <li><a href="{{ route('quotes.create') }}">Crear frase</a></li>
-              </ul>
-          </div>
-    </div>
+    @auth
+        @hasanyrole('admin|super-admin')
+        <div class="fixed z-50">
+            <div id="burger-menu" class="left-5 top-5">
+                <span></span>
+            </div>
+            
+            <div id="menu">
+                <ul>
+                    <li><a href="{{ route('quotes.index') }}">Frases</a></li>
+                    <li><a href="{{ route('quotes.create') }}">Crear frase</a></li>
+                </ul>
+            </div>
+        </div>
+        @endhasanyrole
+    @endauth
 
     <div id="stars" class="min-h-screen w-full flex flex-col justify-center items-center p-4 main">
+        <div id="stars-background"></div>
         @livewire('quote-display')
     </div>
     
     @livewireScripts
-    <script src="{{ asset('js/shooting-stars.js') }}"></script>
+    <script src="{{ asset('js/shooting-stars.js') }}?v=0.02"></script>
     <script>
         var burgerMenu = document.getElementById('burger-menu');
         var overlay = document.getElementById('menu');
-        burgerMenu.addEventListener('click',function(){
-            this.classList.toggle("close");
-            overlay.classList.toggle("overlay");
-        });
+        if (burgerMenu && overlay) {
+            burgerMenu.addEventListener('click',function(){
+                this.classList.toggle("close");
+                overlay.classList.toggle("overlay");
+                document.body.classList.toggle("menu-open");
+            });
+        }
     </script>
 </body>
 </html>

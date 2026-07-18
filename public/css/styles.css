@@ -23,6 +23,18 @@ body {
     animation: bg-animation 15s infinite;
 }
 
+#stars {
+    position: relative;
+    overflow: hidden;
+    transition: filter 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+body.menu-open #stars {
+    filter: blur(12px);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
 @keyframes bg-animation {
     0% {
         background-position: left;
@@ -84,6 +96,8 @@ span.h1-word {
     overflow: visible;
     position: relative;
     z-index: 2;
+    transform: scale(0.78);
+    transform-origin: top left;
 }
 
 #burger-menu span,
@@ -152,24 +166,51 @@ span.h1-word {
     text-align: center;
     padding-top: 20px;
     transition: all 0.3s ease-in-out;
-
 }
 
 #menu.overlay {
     visibility: visible;
     opacity: 1;
-    padding-top: 100px;
-    background: rgba(0, 0, 0, 0.5);
+    padding-top: 150px;
+    background: rgba(0, 0, 0, 1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* Safari support */
+}
+
+#menu ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
 }
 
 #menu li {
     list-style: none;
+    width: 100%;
+    max-width: 280px;
 }
 
 #menu a {
-    color: #fff;
+    color: rgba(255, 255, 255, 0.85);
     display: block;
-    font-size: 20px;
-    margin-bottom: 20px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
+}
+
+#menu a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }

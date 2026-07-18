@@ -31,9 +31,13 @@ class QuoteDisplay extends Component
         }
     
         $this->quote = $newQuote;
-        $this->shownQuotes[] = $this->quote->id;
-        $this->words = explode(' ', $this->quote->quote);
-        $this->dispatch('quote-refreshed');
+        if ($this->quote) {
+            $this->shownQuotes[] = $this->quote->id;
+            $this->words = explode(' ', $this->quote->quote);
+            $this->dispatch('quote-refreshed');
+        } else {
+            $this->words = [];
+        }
     }
     
     public function render()
