@@ -1,11 +1,16 @@
 <?php
-
+ 
 use App\Http\Controllers\QuotesController;
+use App\Livewire\QuotesImport;
 use Illuminate\Support\Facades\Route;
-
+ 
 Route::get('/', [QuotesController::class, 'home'])->name('quotes.home');
-Route::resource('quotes', QuotesController::class)->middleware(['auth', 'role:super-admin']);
 
+Route::middleware(['auth', 'role:super-admin'])->group(function () {
+    Route::get('quotes/import', QuotesImport::class)->name('quotes.import-form');
+    Route::resource('quotes', QuotesController::class);
+});
+ 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

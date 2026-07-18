@@ -18,6 +18,9 @@
                     <x-nav-link href="{{ route('quotes.create') }}" :active="request()->routeIs('quotes.create')">
                         {{ __('Crear frase') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('quotes.import-form') }}" :active="request()->routeIs('quotes.import-form')">
+                        {{ __('Importar frases') }}
+                    </x-nav-link>
                 </div>
             </div>
 
