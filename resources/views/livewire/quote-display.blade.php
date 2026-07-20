@@ -27,13 +27,17 @@
 >
     {{-- Quote --}}
     @if ($quote)
-        <a href="{{ route('quotes.edit', $quote) }}">
-            <h1 x-ref="quoteText" class="text-white text-4xl sm:text-5xl lg:text-6xl !leading-tight font-cormorant-upright-medium"> 
-                @foreach ($words as $word)
-                    <span class="h1-word">{{ $word }}</span>
-                @endforeach
-            </h1>
-        </a>
+        @hasanyrole('admin|super-admin')
+            <a href="{{ route('quotes.edit', $quote) }}">
+        @endhasanyrole
+                <h1 x-ref="quoteText" class="text-white text-4xl sm:text-5xl lg:text-6xl !leading-tight font-cormorant-upright-medium"> 
+                    @foreach ($words as $word)
+                        <span class="h1-word">{{ $word }}</span>
+                    @endforeach
+                </h1>
+        @hasanyrole('admin|super-admin')
+            </a>
+        @endhasanyrole
         {{-- Source --}}
         <div class="text-white my-6 text-sm sm:text-base space-y-2">
             <a href="https://www.google.com/search?q={{ urlencode($quote->bible_verse) }}" target="_blank" rel="noopener noreferrer">
