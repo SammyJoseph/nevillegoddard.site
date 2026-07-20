@@ -27,14 +27,18 @@
 >
     {{-- Quote --}}
     @if ($quote)
-        <h1 x-ref="quoteText" class="text-white text-4xl sm:text-5xl lg:text-6xl !leading-tight font-cormorant-upright-medium"> 
-            @foreach ($words as $word)
-                <span class="h1-word">{{ $word }}</span>
-            @endforeach
-        </h1>
+        <a href="{{ route('quotes.edit', $quote) }}">
+            <h1 x-ref="quoteText" class="text-white text-4xl sm:text-5xl lg:text-6xl !leading-tight font-cormorant-upright-medium"> 
+                @foreach ($words as $word)
+                    <span class="h1-word">{{ $word }}</span>
+                @endforeach
+            </h1>
+        </a>
         {{-- Source --}}
-        <div class="text-white my-4 text-sm sm:text-base">
-            <h3 x-ref="bibleVerse" id="bible-verse" class="italic text-center font-merriweather-regular">{{ $quote->bible_verse }}</h3>
+        <div class="text-white my-6 text-sm sm:text-base space-y-2">
+            <a href="https://www.google.com/search?q={{ urlencode($quote->bible_verse) }}" target="_blank" rel="noopener noreferrer">
+                <h3 x-ref="bibleVerse" id="bible-verse" class="italic text-center font-merriweather-regular hover:underline">{{ $quote->bible_verse }}</h3>
+            </a>
             <h3 x-ref="source" id="source" class="text-center font-merriweather-regular">{{ $quote->source->sourceType->name . ': ' . $quote->source->name }}</h3>
         </div>
     @else
@@ -49,8 +53,9 @@
             <h3 x-ref="source" id="source" class="text-center font-merriweather-regular"></h3>
         </div>
     @endif
+
     {{-- Refresh button --}}
-    <div class="fixed bottom-2 left-1/2 transform -translate-x-1/2">
+    <div class="fixed bottom-3 left-1/2 transform -translate-x-1/2">
         <button 
             type="button" 
             wire:click="refreshQuote" 

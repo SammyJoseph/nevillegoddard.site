@@ -119,6 +119,9 @@ class QuotesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $quote = Quote::withoutGlobalScope('active')->findOrFail($id);
+        $quote->delete();
+
+        return redirect()->route('quotes.index')->with('success', 'Frase eliminada correctamente.');
     }
 }
