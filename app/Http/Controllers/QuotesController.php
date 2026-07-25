@@ -6,6 +6,7 @@ use App\Models\Quote;
 use App\Models\Source;
 use App\Models\SourceType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class QuotesController extends Controller
 {
@@ -60,7 +61,9 @@ class QuotesController extends Controller
 
         $quote = Quote::create($validated);
     
-        return redirect()->route('quotes.index')->with('success', $quote->quote.' added successfully.');
+        return redirect()->route('quotes.index')->with('flash', [
+            'banner' => '"'.Str::limit($quote->quote, 20, '...').'" se agregó.',
+        ]);
     }
 
     /**
@@ -111,7 +114,9 @@ class QuotesController extends Controller
     
         $quote->update($validated);
     
-        return redirect()->route('quotes.index')->with('success', $quote->quote.' updated successfully.');
+        return redirect()->route('quotes.index')->with('flash', [
+            'banner' => '"'.Str::limit($quote->quote, 20, '...').'" se actualizó.',
+        ]);
     }
 
     /**
@@ -122,6 +127,9 @@ class QuotesController extends Controller
         $quote = Quote::withoutGlobalScope('active')->findOrFail($id);
         $quote->delete();
 
-        return redirect()->route('quotes.index')->with('success', 'Frase eliminada correctamente.');
+        return redirect()->route('quotes.index')->with('flash', [
+            'banner' => 'Frase eliminada correctamente.',
+            'bannerStyle' => 'danger',
+        ]);
     }
 }

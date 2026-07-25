@@ -213,7 +213,7 @@ class QuotesImport extends Component
         return view('livewire.quotes-import', [
             'source_types' => $source_types
         ])->layout('layouts.app', [
-            'header' => __('Importar Frases')
+            'header' => '<h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">' . __('Importar Frases') . '</h2>'
         ]);
     }
 }

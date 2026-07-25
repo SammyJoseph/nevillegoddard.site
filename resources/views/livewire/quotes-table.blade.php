@@ -1,6 +1,6 @@
 <div>
-    <div class="mb-4 flex flex-col md:flex-row gap-4">
-        <div class="flex-1">
+    <div class="mb-4 grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="col-span-2 md:col-span-1">
             <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Buscar</label>
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div class="w-full md:w-64">
+        <div>
             <label for="selectedSource" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Fuente</label>
             <select wire:model.live="selectedSource" id="selectedSource" class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="">Todas las fuentes ({{ $totalQuotesCount }})</option>
@@ -24,7 +24,7 @@
             </select>
         </div>
 
-        <div class="w-full md:w-48">
+        <div>
             <label for="perPage" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Mostrar</label>
             <select wire:model.live="perPage" id="perPage" class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="10">10 por página</option>
