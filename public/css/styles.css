@@ -14,18 +14,20 @@
 /* Background */
 body {
     font-family: "Alexandria", sans-serif;
+    background-color: #0b0d19;
 }
 
 .main {
     background: #ddd;
     background-size: 300%;
     background-image: var(--gradient-dark-6);
+    background-attachment: fixed;
     animation: bg-animation 15s infinite;
 }
 
 #stars {
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
     transition: filter 0.4s ease-in-out, opacity 0.4s ease-in-out;
 }
 
@@ -213,4 +215,19 @@ span.h1-word {
     border-color: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Subtle Dark Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.35);
 }

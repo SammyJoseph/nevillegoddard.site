@@ -1,4 +1,5 @@
 <div
+    class="my-auto py-12 pb-28 w-full max-w-4xl px-4 flex flex-col justify-center items-center relative z-10"
     x-data="{ 
         quotes: @js($quotes),
         currentIndex: 0,
@@ -159,8 +160,8 @@
     }"
     x-init="refreshAnimations()"
     x-on:keyup.window="handleKeyup($event)"
-    x-on:touchstart.passive="handleTouchStart($event)"
-    x-on:touchend.passive="handleTouchEnd($event)"
+    x-on:touchstart.passive.window="handleTouchStart($event)"
+    x-on:touchend.passive.window="handleTouchEnd($event)"
     x-on:update-autoplay-interval.window="
         intervalSeconds = $event.detail.seconds;
         if (isPlaying) {
@@ -223,7 +224,7 @@
     </template>
 
     {{-- Bottom controls --}}
-    <div class="fixed bottom-3 left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+    <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex items-center justify-center">
         <div class="flex items-center gap-3 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 shadow-lg">
             {{-- If PAUSED: Show Previous Button --}}
             <template x-if="!isPlaying">

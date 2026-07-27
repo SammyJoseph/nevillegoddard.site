@@ -5,9 +5,9 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="sm:py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl dark:shadow-gray-900/50 sm:rounded-lg px-4 py-8 md:p-12">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl dark:shadow-gray-900/50 sm:rounded-lg px-4 py-8 md:p-12 border border-slate-100 dark:border-gray-700">
                 @include('components.quote-form', [
                     'action' => route('quotes.store'),
                     'buttonText' => 'Guardar',

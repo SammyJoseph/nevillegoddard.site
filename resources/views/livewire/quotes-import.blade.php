@@ -1,4 +1,4 @@
-<div class="py-6 md:py-12">
+<div class="sm:py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Form Card -->

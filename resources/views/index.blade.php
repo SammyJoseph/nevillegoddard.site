@@ -13,9 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}?v=0.02">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}?v=0.03">
     <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/shooting-stars.css') }}?v=0.02">
+    <link rel="stylesheet" href="{{ asset('css/shooting-stars.css') }}?v=0.03">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -32,7 +32,7 @@
     </div>
     
     @livewireScripts
-    <script src="{{ asset('js/shooting-stars.js') }}?v=0.02"></script>
+    <script src="{{ asset('js/shooting-stars.js') }}?v=0.03"></script>
     <script>
         var burgerMenu = document.getElementById('burger-menu');
         var overlay = document.getElementById('menu');
