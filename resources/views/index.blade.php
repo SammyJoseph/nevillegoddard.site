@@ -30,22 +30,11 @@
         </div>
         
         <div id="menu" x-data="{
-            autoplayActive: false,
-            autoplaySeconds: '6',
-            tempActive: false,
-            tempSeconds: '6',
-            init() {
-                this.tempActive = this.autoplayActive;
-                this.tempSeconds = this.autoplaySeconds;
-            },
-            saveAutoplay() {
-                this.autoplayActive = this.tempActive;
-                this.autoplaySeconds = this.tempSeconds;
-                window.dispatchEvent(new CustomEvent('update-autoplay', {
-                    detail: {
-                        active: this.autoplayActive,
-                        seconds: parseInt(this.autoplaySeconds)
-                    }
+            selectedSeconds: 10,
+            selectInterval(sec) {
+                this.selectedSeconds = sec;
+                window.dispatchEvent(new CustomEvent('update-autoplay-interval', {
+                    detail: { seconds: sec }
                 }));
                 var burgerMenu = document.getElementById('burger-menu');
                 var overlay = document.getElementById('menu');
@@ -64,32 +53,43 @@
                     @endhasanyrole
                 @endauth
 
-                <li class="w-full max-w-[280px] p-4 rounded-[25px] border border-white/10 bg-white/[0.03] text-white/85 text-left flex flex-col gap-3 backdrop-blur-sm">
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium tracking-wider uppercase text-white/80">Autoplay</span>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" x-model="tempActive" class="sr-only peer">
-                            <div class="w-11 h-6 bg-white/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
-                        </label>
-                    </div>
+                <li class="w-full max-w-[280px] p-4 rounded-[25px] border border-white/10 bg-white/[0.03] text-white/85 text-center flex flex-col gap-3 backdrop-blur-sm">
+                    <span class="text-xs font-medium tracking-wider uppercase text-white/60">Cambiar frase cada:</span>
                     
-                    <div x-show="tempActive" x-transition class="flex flex-col gap-1.5 pt-1">
-                        <label class="text-xs text-white/60">Cambiar frase cada:</label>
-                        <select x-model="tempSeconds" class="bg-zinc-900/90 text-white border border-white/20 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-white/50 cursor-pointer">
-                            <option value="3">3 segundos</option>
-                            <option value="6">6 segundos</option>
-                            <option value="15">15 segundos</option>
-                            <option value="30">30 segundos</option>
-                        </select>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button 
+                            type="button" 
+                            @click="selectInterval(10)"
+                            :class="selectedSeconds === 10 ? 'bg-white text-black font-semibold border-white' : 'bg-white/10 text-white hover:bg-white/20 border-white/20'"
+                            class="py-2 px-3 rounded-xl border text-sm font-medium transition-all hover:scale-[1.03] active:scale-[0.97]"
+                        >
+                            10s
+                        </button>
+                        <button 
+                            type="button" 
+                            @click="selectInterval(20)"
+                            :class="selectedSeconds === 20 ? 'bg-white text-black font-semibold border-white' : 'bg-white/10 text-white hover:bg-white/20 border-white/20'"
+                            class="py-2 px-3 rounded-xl border text-sm font-medium transition-all hover:scale-[1.03] active:scale-[0.97]"
+                        >
+                            20s
+                        </button>
+                        <button 
+                            type="button" 
+                            @click="selectInterval(30)"
+                            :class="selectedSeconds === 30 ? 'bg-white text-black font-semibold border-white' : 'bg-white/10 text-white hover:bg-white/20 border-white/20'"
+                            class="py-2 px-3 rounded-xl border text-sm font-medium transition-all hover:scale-[1.03] active:scale-[0.97]"
+                        >
+                            30s
+                        </button>
+                        <button 
+                            type="button" 
+                            @click="selectInterval(60)"
+                            :class="selectedSeconds === 60 ? 'bg-white text-black font-semibold border-white' : 'bg-white/10 text-white hover:bg-white/20 border-white/20'"
+                            class="py-2 px-3 rounded-xl border text-sm font-medium transition-all hover:scale-[1.03] active:scale-[0.97]"
+                        >
+                            60s
+                        </button>
                     </div>
-
-                    <button 
-                        type="button" 
-                        @click="saveAutoplay()"
-                        class="mt-1 w-full py-2 px-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-medium text-xs tracking-wider uppercase transition-all hover:scale-[1.02] active:scale-[0.98]"
-                    >
-                        Guardar
-                    </button>
                 </li>
             </ul>
         </div>
