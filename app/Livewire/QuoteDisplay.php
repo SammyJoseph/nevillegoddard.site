@@ -7,72 +7,32 @@ use Livewire\Component;
 
 class QuoteDisplay extends Component
 {
-    public $words;
-    public $quote;
-    public $shownQuotes = [];
-    public $currentIndex = -1;
-
-    public function mount()
-    {
-        $this->refreshQuote();
-    }
-
-    public function loadQuoteById($id)
-    {
-        $newQuote = Quote::with('source.sourceType')->find($id);
-        if ($newQuote) {
-            $this->quote = $newQuote;
-            $this->words = explode(' ', $this->quote->quote);
-            $this->dispatch('quote-refreshed');
-        }
-    }
-
-    public function previousQuote()
-    {
-        if ($this->currentIndex > 0) {
-            $this->currentIndex--;
-            $this->loadQuoteById($this->shownQuotes[$this->currentIndex]);
-        }
-    }
-
-    public function nextQuote()
-    {
-        if ($this->currentIndex < count($this->shownQuotes) - 1) {
-            $this->currentIndex++;
-            $this->loadQuoteById($this->shownQuotes[$this->currentIndex]);
-        } else {
-            $this->refreshQuote();
-        }
-    }
-
-    public function refreshQuote()
-    {
-        $newQuote = Quote::with('source.sourceType')
-            ->whereNotIn('id', $this->shownQuotes)
-            ->inRandomOrder()
-            ->first();
-    
-        if (!$newQuote) {
-            $this->shownQuotes = [];
-            $this->currentIndex = -1;
-            $newQuote = Quote::with('source.sourceType')
-                ->inRandomOrder()
-                ->first();
-        }
-    
-        if ($newQuote) {
-            $this->shownQuotes[] = $newQuote->id;
-            $this->currentIndex = count($this->shownQuotes) - 1;
-            $this->quote = $newQuote;
-            $this->words = explode(' ', $this->quote->quote);
-            $this->dispatch('quote-refreshed');
-        } else {
-            $this->words = [];
-        }
-    }
-    
     public function render()
     {
-        return view('livewire.quote-display');
+        $user = auth()->user();
+        $isAdmin = $user && method_exists($user, 'hasAnyRole') && $user->hasAnyRole(['admin', 'super-admin']);
+
+        $quotes = Quote::with('source.sourceType')
+            ->get()
+            ->shuffle()
+            ->map(function ($quote) use ($isAdmin) {
+                $sourceType = optional(optional($quote->source)->sourceType)->name;
+                $sourceName = optional($quote->source)->name;
+                $sourceText = ($sourceType && $sourceName) ? "{$sourceType}: {$sourceName}" : ($sourceName ?: '');
+
+                return [
+                    'id' => $quote->id,
+                    'quote' => $quote->quote,
+                    'words' => array_values(array_filter(explode(' ', $quote->quote), fn($w) => $w !== '')),
+                    'bible_verse' => $quote->bible_verse,
+                    'source_text' => $sourceText,
+                    'edit_url' => $isAdmin ? route('quotes.edit', $quote) : null,
+                ];
+            })
+            ->values()
+            ->toArray();
+
+        return view('livewire.quote-display', compact('quotes'));
     }
 }
+
